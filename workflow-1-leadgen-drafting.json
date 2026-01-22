@@ -1,0 +1,1237 @@
+{
+  "name": "workflow-1-leadgen-drafting",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-intake",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "57922f83-3759-42e0-83fb-a055b5c2f7ce",
+      "name": "Webhook",
+      "webhookId": "34d87d27-31b4-4002-af0b-57623d88e3fc"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6cd50d9a-8ff9-495b-8861-38f8d865fd0e",
+              "name": "client_description",
+              "value": "={{ $json.body.client_description }}",
+              "type": "string"
+            },
+            {
+              "id": "9e71009b-abee-49c2-8428-bc2ae57bf119",
+              "name": "target_industry",
+              "value": "={{ $json.body.target_industry }}",
+              "type": "string"
+            },
+            {
+              "id": "b475cb1e-f610-4dee-b874-54c372d43ed1",
+              "name": "country",
+              "value": "={{ $json.body.country }}",
+              "type": "string"
+            },
+            {
+              "id": "91937774-9de6-4553-af3d-09ba0723a1e0",
+              "name": "city",
+              "value": "={{ $json.body.city }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "739da759-e080-48e8-ba2f-6fa2143e580f",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "224827d8-4378-426f-9279-580a9ebddac3",
+              "name": "company_name",
+              "value": "={{ $json.company_name }}",
+              "type": "string"
+            },
+            {
+              "id": "abfb6b06-e31e-4d0c-a897-2b4b1d7c431a",
+              "name": "website",
+              "value": "={{ $json.website }}",
+              "type": "string"
+            },
+            {
+              "id": "81ca7f39-a925-4782-bae6-996564a1ff76",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "62b9a080-f7c7-434c-a4cd-88d76e0babc0",
+              "name": "phone",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "301060d8-bca9-450b-98d5-3318a803b417",
+              "name": "linkedin",
+              "value": "={{ $json.linkedin }}",
+              "type": "string"
+            },
+            {
+              "id": "6a21b8e8-712e-4d53-884b-14a3e59ebe7e",
+              "name": "industry",
+              "value": "={{ $('Merge').item.json.target_industry }}",
+              "type": "string"
+            },
+            {
+              "id": "b4c6e878-40a6-4f59-b59b-c36e5a99f4b4",
+              "name": "city",
+              "value": "={{ $('Merge').item.json.city }}",
+              "type": "string"
+            },
+            {
+              "id": "2195b8eb-2d13-4730-bcb2-daa61393cc96",
+              "name": "country",
+              "value": "={{ $('Merge').item.json.country }}",
+              "type": "string"
+            },
+            {
+              "id": "7e97a60c-c88d-4555-823f-4d1a98b4e76b",
+              "name": "summary",
+              "value": "={{ $json.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "a529289e-fc6c-4258-a033-46c94825dfd1",
+              "name": "lead_score",
+              "value": "={{ $json.lead_score }}",
+              "type": "number"
+            },
+            {
+              "id": "679fe2eb-9e8c-462e-94b6-8d4716ec8e1a",
+              "name": "status",
+              "value": "={{ $json.status }}",
+              "type": "string"
+            },
+            {
+              "id": "7adc79ee-da3a-4ee4-a36c-d5ac917a3eca",
+              "name": "created_at",
+              "value": "={{ $json.created_at }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2240,
+        -16
+      ],
+      "id": "f2e6e5a1-39f7-4fde-a069-e09ac64bc764",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.target_industry}}",
+                    "rightValue": "restaurant",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d37bff44-f8a5-492c-954b-7a5b159614a3"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "33b184ac-2d37-4dd2-9b0d-f9bbe2430fa3",
+                    "leftValue": "={{$json.target_industry}}",
+                    "rightValue": "hotel",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0fb5c2e4-0f4d-484b-93dc-672ddc563e72",
+                    "leftValue": "={{$json.target_industry}}",
+                    "rightValue": "pharmacy",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "23903c89-0fae-42e1-b5d7-98b1595fa510",
+                    "leftValue": "={{$json.target_industry}}",
+                    "rightValue": "supermarket",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        -32
+      ],
+      "id": "52a46a9b-cd90-4044-9aba-7cbac9d951e9",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3812d50-f165-42b4-89bb-693abee65289",
+              "name": "osm_key",
+              "value": "amenity",
+              "type": "string"
+            },
+            {
+              "id": "57324987-0a71-45f1-82cc-b15ee26c5880",
+              "name": "osm_value",
+              "value": "restaurant",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        -304
+      ],
+      "id": "8f732f21-51f4-4b6a-b5fc-c4e2fe216cde",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e598165b-3d20-47ca-b419-a952a162c149",
+              "name": "osm_key",
+              "value": "tourism",
+              "type": "string"
+            },
+            {
+              "id": "3e4ff958-0c6d-4af7-8cbd-de0fbf15bcca",
+              "name": "osm_value",
+              "value": "hotel",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        -144
+      ],
+      "id": "3a29150c-a1b6-4ff1-8bff-538544fcbef8",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "36bfcca9-607b-4556-b1ee-9e839aae013b",
+              "name": "osm_key",
+              "value": "amenity",
+              "type": "string"
+            },
+            {
+              "id": "09bf0796-8894-4806-972a-66d74fcc970f",
+              "name": "osm_value",
+              "value": "pharmacy",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        16
+      ],
+      "id": "ed1412c7-78a7-40c4-b266-43b9ae6b61c1",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ff151570-5ce6-48b7-8d1c-7db839c0ee5d",
+              "name": "osm_key",
+              "value": "shop",
+              "type": "string"
+            },
+            {
+              "id": "39aff41f-93f9-4b2e-9cc0-69291ce86c1c",
+              "name": "osm_value",
+              "value": "supermarket",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        176
+      ],
+      "id": "114427db-e264-41f7-8a25-16fc7fe5d38b",
+      "name": "Edit Fields5"
+    },
+    {
+      "parameters": {
+        "url": "=https://nominatim.openstreetmap.org/search?format=json&limit=1&q={{$json.city || $json.body?.city}}, {{ $json.country || $json.body?.country }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "n8n-lead-agent (vishwajayasankha@gmail.com)"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1072,
+        -16
+      ],
+      "id": "2e0108a9-2fdb-497b-ba87-a8350f27b807",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e8f1d2d1-64ec-40e0-aa56-625623f669bd",
+              "name": "south",
+              "value": "={{$json.boundingbox[0]}}",
+              "type": "string"
+            },
+            {
+              "id": "273e0af5-1a30-4c44-a691-eca01182c233",
+              "name": "north",
+              "value": "={{$json.boundingbox[1]}}",
+              "type": "string"
+            },
+            {
+              "id": "c3114f28-2c36-4f6d-ab82-cc2da63de71b",
+              "name": "west",
+              "value": "={{$json.boundingbox[2]}}",
+              "type": "string"
+            },
+            {
+              "id": "6779a075-7ed5-45ae-b95d-fa81de360584",
+              "name": "east",
+              "value": "={{$json.boundingbox[3]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1440,
+        16
+      ],
+      "id": "bbb38266-70c4-41b0-974a-62908521764d",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://overpass-api.de/api/interpreter",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "data",
+              "value": "=[out:json][timeout:25];\n(\n  node[\"{{$json.osm_key}}\"=\"{{$json.osm_value}}\"]({{$json.south}},{{$json.west}},{{$json.north}},{{$json.east}});\n  way[\"{{$json.osm_key}}\"=\"{{$json.osm_value}}\"]({{$json.south}},{{$json.west}},{{$json.north}},{{$json.east}});\n  relation[\"{{$json.osm_key}}\"=\"{{$json.osm_value}}\"]({{$json.south}},{{$json.west}},{{$json.north}},{{$json.east}});\n);\nout center tags;"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1616,
+        0
+      ],
+      "id": "d476b560-34ec-4ce7-bb71-f84f86b64eb7",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const elements = $json.elements || [];\n\n// How many leads you want per run (VERY SMALL)\nconst LIMIT = 5;\n\n// Score by contactability (same idea as yours)\nfunction scoreLead({ website, email, phone }) {\n  let score = 0;\n  if (website) score += 3;\n  if (email) score += 3;\n  if (phone) score += 2;\n  return score; // max 8\n}\n\nconst seen = new Set();\n\nconst leads = elements\n  .filter(e => e.tags && e.tags.name) // must have a name\n  .map(e => {\n    const t = e.tags || {};\n    const phone = t.phone || t[\"contact:phone\"] || \"\";\n    const email = t.email || t[\"contact:email\"] || \"\";\n    const website = t.website || t[\"contact:website\"] || \"\";\n\n    const lat = e.lat ?? e.center?.lat ?? \"\";\n    const lon = e.lon ?? e.center?.lon ?? \"\";\n\n    // simple summary\n    const parts = [];\n    if (t.cuisine) parts.push(`Cuisine: ${t.cuisine}`);\n    if (t.opening_hours) parts.push(`Hours: ${t.opening_hours}`);\n    if (t[\"addr:street\"] || t[\"addr:city\"]) {\n      parts.push(`Address: ${[t[\"addr:street\"], t[\"addr:city\"]].filter(Boolean).join(\", \")}`);\n    }\n    const summary = parts.length ? parts.join(\" | \") : \"Public listing found on OpenStreetMap.\";\n\n    const lead_score = scoreLead({ website, email, phone });\n\n    return {\n      company_name: t.name,\n      website,\n      email,\n      phone,\n      linkedin: \"\",\n      industry: $json.target_industry,\n      city: $json.city,\n      country: $json.country,\n      summary,\n      lead_score,\n      osm_id: `${e.type}/${e.id}`,\n      lat,\n      lon,\n      status: \"new\",\n      created_at: new Date().toISOString(),\n    };\n  })\n  // Prefer leads with contact details (keeps your LLM usage low)\n  .filter(l => l.lead_score >= 3) // tweak: 3 = at least website OR email OR phone\n  // Remove duplicates within this run\n  .filter(l => {\n    if (seen.has(l.osm_id)) return false;\n    seen.add(l.osm_id);\n    return true;\n  })\n  // Sort best leads first\n  .sort((a, b) => b.lead_score - a.lead_score)\n  // Take only a few\n  .slice(0, LIMIT);\n\nreturn leads.map(l => ({ json: l }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1824,
+        -16
+      ],
+      "id": "814360c9-52a4-407a-bfc9-6a8688236a2b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0a2c10b3-777d-480a-9302-813affa3ac3c",
+              "leftValue": "={{ $json.lead_score }}",
+              "rightValue": 3,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2032,
+        -16
+      ],
+      "id": "05d3d93d-7dc4-4541-90a7-fd0b0c3db05f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 5,
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1248,
+        -16
+      ],
+      "id": "8f8b4642-2f1b-4005-be54-7bf6b8b18422",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1CsTY5xEGeHbVmDmR6KFaxT742vrvu7nGgQA3g3jxhGo",
+          "mode": "list",
+          "cachedResultName": "Fexcon_AI_Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CsTY5xEGeHbVmDmR6KFaxT742vrvu7nGgQA3g3jxhGo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CsTY5xEGeHbVmDmR6KFaxT742vrvu7nGgQA3g3jxhGo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "company_name": "={{ $('MergeLead+Lookup').item.json.company_name }}",
+            "website": "={{ $('MergeLead+Lookup').item.json.website }}",
+            "email": "={{ $('MergeLead+Lookup').item.json.email }}",
+            "phone": "=' {{ $('MergeLead+Lookup').item.json.phone }}",
+            "linkedin": "={{ $('MergeLead+Lookup').item.json.linkedin }}",
+            "industry": "={{ $('MergeLead+Lookup').item.json.industry }}",
+            "city": "={{ $('MergeLead+Lookup').item.json.city }}",
+            "country": "={{ $('MergeLead+Lookup').item.json.country }}",
+            "summary": "={{ $json.summary }}",
+            "lead_score": "={{ $json.lead_score }}",
+            "status": "={{ $('MergeLead+Lookup').item.json.status }}",
+            "created_at": "={{ $json.created_at }}",
+            "osm_id": "={{ $('Code in JavaScript').item.json.osm_id }}",
+            "email_subject": "={{ $json.email_subject }}",
+            "email_body": "={{ $json.email_body }}",
+            "social_post": "={{ $json.social_post }}",
+            "draft_status": "={{ $json.draft_status }}",
+            "approval_token": "={{ $json.approval_token }}",
+            "approved_at": "={{ $json.approved_at }}",
+            "rejected_at": "={{ $json.rejected_at }}"
+          },
+          "matchingColumns": [
+            "osm_id"
+          ],
+          "schema": [
+            {
+              "id": "osm_id",
+              "displayName": "osm_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company_name",
+              "displayName": "company_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "industry",
+              "displayName": "industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "country",
+              "displayName": "country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email_subject",
+              "displayName": "email_subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email_body",
+              "displayName": "email_body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "social_post",
+              "displayName": "social_post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "draft_status",
+              "displayName": "draft_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "approval_token",
+              "displayName": "approval_token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "approved_at",
+              "displayName": "approved_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "rejected_at",
+              "displayName": "rejected_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3760,
+        -32
+      ],
+      "id": "dc940985-243e-4d18-8885-335f28c79e72",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "rBXxZpyVch0xTSxJ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "68459070-208e-40f3-b4f0-5f02ed44779b",
+              "leftValue": "={{ Object.keys($json.lookup || {}).length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3120,
+        -16
+      ],
+      "id": "72e69c47-ccd3-4919-ae61-98e5bcedb95c",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1CsTY5xEGeHbVmDmR6KFaxT742vrvu7nGgQA3g3jxhGo",
+          "mode": "list",
+          "cachedResultName": "Fexcon_AI_Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CsTY5xEGeHbVmDmR6KFaxT742vrvu7nGgQA3g3jxhGo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CsTY5xEGeHbVmDmR6KFaxT742vrvu7nGgQA3g3jxhGo/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "osm_id",
+              "lookupValue": "={{ $('Code in JavaScript').item.json.osm_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2496,
+        -16
+      ],
+      "id": "b2ec3367-944c-4a2f-8a7f-9c9b9bac4e66",
+      "name": "LookupByOsmId",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "rBXxZpyVch0xTSxJ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Wrap lookup output so it won't overwrite your lead fields\nreturn items.map(i => ({ json: { lookup: i.json } }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2704,
+        -16
+      ],
+      "id": "f5778ea8-ee67-4ca0-9e83-11cbdcbb749f",
+      "name": "WrapLookup"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2912,
+        -16
+      ],
+      "id": "785a3593-9c96-40e0-8eb1-dce96fac5b8b",
+      "name": "MergeLead+Lookup"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Ollama returns the generated text in $json.response\nconst raw = ($json.response || \"\").trim();\n\n// Attempt to parse directly\nfunction tryParse(s) {\n  try { return JSON.parse(s); } catch { return null; }\n}\n\nlet obj = tryParse(raw);\n\nif (!obj) {\n  // Fallback: extract the first JSON object from the text\n  const start = raw.indexOf(\"{\");\n  const end = raw.lastIndexOf(\"}\");\n  if (start !== -1 && end !== -1 && end > start) {\n    obj = tryParse(raw.slice(start, end + 1));\n  }\n}\n\n// Final fallback if still not parseable\nif (!obj) {\n  obj = {\n    email_subject: \"\",\n    email_body: raw.slice(0, 600), // at least keep something visible\n    social_post: \"\",\n    lead_score: 0,\n    summary: \"\"\n  };\n}\n\n// Normalize lead_score (0-100 int)\nlet ls = obj.lead_score;\nif (typeof ls === \"string\") ls = parseInt(ls, 10);\nif (typeof ls !== \"number\" || Number.isNaN(ls)) ls = 0;\nls = Math.max(0, Math.min(100, Math.round(ls)));\nobj.lead_score = ls;\n\n// Base lead fields coming from previous nodes (company_name, osm_id, etc.)\nconst base = $input.item.json || {};\n\n// Generate approval token (only if missing)\nconst approval_token =\n  base.approval_token ||\n  (Math.random().toString(36).slice(2) + Date.now().toString(36));\n\n// Build final row JSON\nconst out = {\n  ...base,\n  ...obj,\n  approval_token,\n  draft_status: base.draft_status || \"drafted\",\n  approved_at: base.approved_at || \"\",\n  rejected_at: base.rejected_at || \"\"\n};\n\nreturn [{ json: out }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3568,
+        -32
+      ],
+      "id": "61ce57aa-e446-44ef-a93d-d7da274fa5e6",
+      "name": "Parse Ollama JSON"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:11434/api/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"phi3:mini\",\n  \"stream\": false,\n  \"prompt\": \"You are an assistant that outputs ONLY valid JSON.\\n\\nCLIENT:\\n{{ $('Merge').item.json.client_description }}\\n\\nLEAD:\\nCompany: {{$json.company_name}}\\nWebsite: {{$json.website}}\\nEmail: {{$json.email}}\\nPhone: {{$json.phone}}\\nLocation: {{$json.city}}, {{$json.country}}\\nNotes: {{$json.summary}}\\n\\nReturn ONLY this JSON object (no markdown, no explanations):\\n{\\n  \\\"email_subject\\\": \\\"...\\\",\\n  \\\"email_body\\\": \\\"...\\\",\\n  \\\"social_post\\\": \\\"...\\\",\\n  \\\"lead_score\\\": 0,\\n  \\\"summary\\\": \\\"...\\\"\\n}\\n\\nRules:\\n- Email body max 130 words.\\n- Do not invent facts.\\n- lead_score is 0-100.\\n- summary is one sentence.\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3344,
+        -32
+      ],
+      "id": "5000439c-20d4-4305-bac1-ca10cd3a9f73",
+      "name": "Ollama Generate"
+    },
+    {
+      "parameters": {
+        "fromEmail": "vishwajayasankha@gmail.com",
+        "toEmail": "vishwajayasankha@gmail.com",
+        "html": "=<h3>New Lead Draft Ready</h3>\n<p><b>Company:</b> {{$json.company_name}}<br/>\n<b>Industry:</b> {{$json.industry}}<br/>\n<b>Location:</b> {{$json.city}}, {{$json.country}}</p>\n\n<h4>Email Draft</h4>\n<p><b>Subject:</b> {{$json.email_subject}}</p>\n<p>{{$json.email_body}}</p>\n\n<h4>Social Post</h4>\n<p>{{$json.social_post}}</p>\n\n<hr/>\n\n<a style=\"padding:10px 14px;background:#16a34a;color:white;text-decoration:none;border-radius:6px;\"\n   href=\"http://localhost:5678/webhook/lead-approval?osm_id={{$json.osm_id}}&action=approve&token={{$json.approval_token}}\">\n   ✅ Approve\n</a>\n\n&nbsp;\n\n<a style=\"padding:10px 14px;background:#dc2626;color:white;text-decoration:none;border-radius:6px;\"\n   href=\"http://localhost:5678/webhook/lead-approval?osm_id={{$json.osm_id}}&action=reject&token={{$json.approval_token}}\">\n   ❌ Reject\n</a>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        3968,
+        -32
+      ],
+      "id": "c79056fb-96e1-4c75-adf4-06c79c101ee5",
+      "name": "Send email",
+      "webhookId": "a4f30ba4-e867-4f8f-99da-c38c3fdb2c27",
+      "credentials": {
+        "smtp": {
+          "id": "uatKbjnoFechYP7a",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "LookupByOsmId",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "MergeLead+Lookup",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Edit Fields5": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields6": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Ollama Generate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "LookupByOsmId": {
+      "main": [
+        [
+          {
+            "node": "WrapLookup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WrapLookup": {
+      "main": [
+        [
+          {
+            "node": "MergeLead+Lookup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MergeLead+Lookup": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Ollama JSON": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Generate": {
+      "main": [
+        [
+          {
+            "node": "Parse Ollama JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "49508e74-434c-4d88-b844-ad42149a8ac5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e258bb230820c6b3f3c9667131221e04f6fcf2a88f5fe5d293544342a0e7c3f8"
+  },
+  "id": "YHwbvKZjWZ8w6TM6gfJO1",
+  "tags": []
+}
